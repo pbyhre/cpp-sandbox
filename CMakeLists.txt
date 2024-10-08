@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.21)
-project(pb-cpp-program-template CXX)
+project(cpp-sandbox CXX)
 
 
-add_executable(pb-cpp-program-template 
+add_executable(cpp-sandbox 
     src/main.cpp
 )
 
@@ -11,10 +11,10 @@ if (UNIX)
 endif()
 
 if (WIN32)
-    target_compile_definitions(pb-cpp-program-template PRIVATE _CRT_SECURE_NO_WARNINGS)
+    target_compile_definitions(cpp-sandbox PRIVATE _CRT_SECURE_NO_WARNINGS)
 endif()
 
-set_target_properties(pb-cpp-program-template PROPERTIES 
+set_target_properties(cpp-sandbox PROPERTIES 
     CXX_STANDARD 20
     CXX_STANDARD_REQUIRED YES
     CXX_EXTENSIONS NO
@@ -23,7 +23,7 @@ set_target_properties(pb-cpp-program-template PROPERTIES
 
 
 #Bring the headers, plugin include, algorithm include
-target_include_directories(pb-cpp-program-template PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include )
+target_include_directories(cpp-sandbox PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include )
 
 # only do the testing targets if we are doing this project.  this way
 # other projects won't get this stuff.
@@ -41,22 +41,22 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     target_link_libraries(GTest::GTest INTERFACE gtest_main)
 
 
-    add_executable(pb-cpp-program-template-test 
+    add_executable(cpp-sandbox-test 
         test/DummyTest.cpp
         )
 
-    target_link_libraries(pb-cpp-program-template-test PRIVATE
+    target_link_libraries(cpp-sandbox-test PRIVATE
         GTest::GTest
         )
 
-    set_target_properties(pb-cpp-program-template-test PROPERTIES 
+    set_target_properties(cpp-sandbox-test PROPERTIES 
         CXX_STANDARD 20
         CXX_STANDARD_REQUIRED YES
         CXX_EXTENSIONS NO
         POSITION_INDEPENDENT_CODE ON
     )
 
-    add_test(pb-cpp-program-template-gtests pb-cpp-program-template-test)
+    add_test(cpp-sandbox-gtests cpp-sandbox-test)
 
     file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test/resource/)
 
@@ -64,7 +64,7 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
     file(TO_NATIVE_PATH ${CMAKE_CURRENT_BINARY_DIR}/test/resource/ TEST_RESOURCES_DEST)    
     #copy the resources used for tests into the build folder under test/resource.
     add_custom_command(
-            TARGET pb-cpp-program-template-test POST_BUILD
+            TARGET cpp-sandbox-test POST_BUILD
             COMMAND ${CMAKE_COMMAND} -E copy_directory
                     ${TEST_RESOURCES_SRC}
                     ${TEST_RESOURCES_DEST})
