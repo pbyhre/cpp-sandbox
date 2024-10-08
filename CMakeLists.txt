@@ -56,7 +56,7 @@ if (CMAKE_CURRENT_SOURCE_DIR STREQUAL CMAKE_SOURCE_DIR)
         POSITION_INDEPENDENT_CODE ON
     )
 
-    add_test(pb-cpp-program-template-gtests pb-common-test)
+    add_test(pb-cpp-program-template-gtests pb-cpp-program-template-test)
 
     file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test/resource/)
 
